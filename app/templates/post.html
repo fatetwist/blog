@@ -16,7 +16,7 @@
   <img src="{{ c.user.avatar }} " width="64px" height="64px">
       {{ c.body }}
       <hr>
-  <span class="badge" style="text-align: right">评论时间: {{ c.timastamp }}</span><br>
+  <span class="badge" style="text-align: right">评论时间: {{ moment(c.timestamp).format('YYYY年M月D日 H:mm:ss a') }}</span><br>
 
 
 

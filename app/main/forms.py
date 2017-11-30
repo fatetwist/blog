@@ -1,3 +1,4 @@
+# coding=utf-8
 from flask_wtf import Form
 from wtforms import SubmitField, StringField,TextField,FileField
 from wtforms.validators import Length, Required

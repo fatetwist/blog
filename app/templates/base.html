@@ -2,6 +2,7 @@
 {% block scripts %}
     {{ super() }}
     {{ moment.include_moment() }}
+    {{ moment.lang('zh_CN') }}
 {% endblock %}
 {% block title %}{% block title2 %}{% endblock %}Flasky{% endblock %}
 {% block navbar %}

@@ -1,3 +1,4 @@
+# coding=utf-8
 from werkzeug.security import generate_password_hash, check_password_hash
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from . import db
@@ -69,7 +70,7 @@ class Comment(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
     body = db.Column(db.Text)
-    timestamp = db.Column(db.String(64), default=datetime.utcnow)
+    timestamp = db.Column(db.DateTime(), default=datetime.utcnow)
 
 
 class User(db.Model, UserMixin):
@@ -85,7 +86,7 @@ class User(db.Model, UserMixin):
     location = db.Column(db.Text())
     about_me = db.Column(db.Text())
     member_since = db.Column(db.DateTime, default=datetime.utcnow)
-    last_seen = db.Column(db.DateTime, default=datetime.utcnow())
+    last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     avatar = db.Column(db.String(128), default='\\static\\avatar\\default.png')
     posts = db.relationship('Post', backref='author', lazy='dynamic')
 

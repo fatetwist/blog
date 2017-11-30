@@ -1,3 +1,4 @@
+# coding=utf-8
 from . import main
 from flask import render_template, request, flash, redirect, url_for, current_app, abort, make_response
 from ..models import User, Post, Permission, Follow, AnonymousUser
@@ -7,6 +8,7 @@ from .. import db
 import os
 from datetime import datetime
 from ..decorators import permission_required
+from ..models import Comment
 
 
 @main.route('/', methods=['POST', 'GET'])
@@ -73,7 +75,7 @@ def post(id):
         user = current_user._get_current_object()
         send_comment()
         return redirect(url_for('.post', id=id))
-    comments = post.comments.all()
+    comments = post.comments.order_by(Comment.timestamp.desc()).all()
     return render_template('post.html', posts=[post], p=post, form=form, comments=comments)
 
 
