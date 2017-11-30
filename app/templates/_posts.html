@@ -1,0 +1,31 @@
+
+<ul class="list-group">
+{% for x in posts %}
+    <div class="panel panel-primary">
+    <div class="panel-heading">{{ x.author.username }}</div>
+    <li class="list-group-item">
+        <a href="{{ url_for('.user', username=x.author.username) }}"><img src="{{ x.author.avatar }}" width="64px" height="64px"></a>
+
+     <div class="post-body">
+         {% if x.body_html %}
+         {{ x.body_html | safe }}
+         {% else %}
+         {{ x.body }}
+         {% endif %}
+     </div>
+
+
+    </li>
+
+     <div class="panel-footer" style="text-align: right;">
+         {% if current_user.is_admin() or current_user==x.author%}
+         <span class="label label-primary"><a href="{{ url_for('.edit_post', id=x.id) }}" style="color: white;">编辑博文</a></span>
+         {% endif %}
+         <span class="label label-default"><a href="{{ url_for('.post', id=x.id) }}" style="color: red;">查看详情</a></span>
+         <span class="badge">发表于{{ x.timestamp }}</span><br>
+     </div>
+
+    </div>
+
+{% endfor %}
+</ul>

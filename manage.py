@@ -1,7 +1,7 @@
 from flask_script import Shell, Manager
 from app import db
 from app import create_app
-from app.models import User, Role, Permission
+from app.models import User, Role, Permission, Post, Follow, Comment
 from flask_migrate import MigrateCommand, Migrate
 
 
@@ -11,7 +11,7 @@ migrate = Migrate(app, db)
 
 
 def make_shell_context():
-    return dict(User=User, Role=Role, db=db)
+    return dict(User=User, Role=Role, db=db, Post=Post, Follow=Follow, Comment=Comment)
 
 
 manager.add_command('db', MigrateCommand)

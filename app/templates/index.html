@@ -1,15 +1,33 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import '_macros.html' as macro %}
+{% block scripts %}
+
+    {{ super() }}
+    {{ pagedown.include_pagedown() }}
+{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="">
+{% endblock %}
+{% block title %}Flasky{% endblock %}
 
 {% block page_content %}
-
-
-
-    <h1>欢迎你，
-    {% if current_user.is_authenticated %}
-    {{ current_user.username }}
-    {% else %}
-    stranger
-    {% endif %}！
-    </h1>
+<div class="page-header panel">
+<div class="container">
+    <h1 style="text-align: center">Hello, {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}Stranger{% endif %}!</h1>
+    {% if current_user.can(Permission.WRITE_ARTICLES) %}
+    {{ wtf.quick_form(form) }}
+    {% endif %}
 </div>
+</div>
+    <hr>
+    <ul class="nav nav-tabs">
+  <li role="presentation" {% if not show_followed %}class="active"{% endif %}><a href="{{ url_for('.all') }}">所有博客</a></li>
+  <li role="presentation" {% if show_followed %}class="active"{% endif %}><a href="{{ url_for('.followed')  }}">我关注的</a></li>
+</ul>
+
+{% include '_posts.html' %}
+    {{ macro.pagination_widget(pagination, '.index') }}
 {% endblock %}
+

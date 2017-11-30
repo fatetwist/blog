@@ -1,11 +1,6 @@
 {% extends "bootstrap/base.html" %}
-{% block scripts %}
-    {{ super() }}
-    {{ moment.include_moment() }}
-{% endblock %}
-{% block title %}{% block title2 %}{% endblock %}Flasky{% endblock %}
+{% block title %}Flasky{% endblock %}
 {% block navbar %}
-
 <div class="navbar navbar-inverse" role="navigation">
  <div class="container">
  <div class="navbar-header">
@@ -27,7 +22,7 @@
  <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ current_user.username }}<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="{{ url_for('main.user', username=current_user.username) }}">个人资料</a></li>
+            <li><a href="#">个人资料</a></li>
             <li><a href="#">我的文章</a></li>
             <li><a href="#">我的关注</a></li>
             <li role="separator" class="divider"></li>
@@ -40,7 +35,7 @@
         </li>
 
  {% else %}
- <li><a href="{{ url_for('auth.login') }}">登录</a></li>
+ <li><a href="{{ url_for('auth.login') }}">Sign In</a></li>
  {% endif %}
 </ul>
  </div>
@@ -48,8 +43,8 @@
 </div>
 
 {% endblock %}
+
 {% block content %}
-<div class="jumbotron">
     <div class="container">
 {% for m in get_flashed_messages() %}
 
@@ -58,8 +53,6 @@
         {{ m }}
     </div>
 {% endfor %}
- {% block page_content %}{% endblock %}
     </div>
-</div>
+    {% block usercontent %}{% endblock %}
 {% endblock %}
-

@@ -44,15 +44,9 @@ def secret():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        print('查找角色')
-
-        print('开始创建用户')
         user = User(email=form.email.data, username=form.username.data, password=form.password.data)
-        print('创建用户')
         db.session.add(user)
-        print('添加用户')
         db.session.commit()
-        print('提交数据库')
         token = user.generate_confirmation_token()
         send_mail('[Flasky]用户激活', form.email.data, 'mail/confirm', user=user, token=token)
         flash('激活邮件已经发送到您的邮箱，请注意查收！')
@@ -76,6 +70,29 @@ def confirm(token):
         return redirect(url_for('auth.login'))
 
 
+@auth.route('/resend_mail')
+@login_required
+def resend_mail():
+    if current_user.confirmed:
+        return redirect(url_for('main.index'))
+    token = current_user.generate_confirmation_token()
+    send_mail('[Flasky]用户激活', current_user.email, 'mail/confirm', user=current_user, token=token)
+    flash('激活邮件已经发送到您的邮箱，请注意查收！')
+    return redirect(url_for('auth.unconfirmed'))
+
+
+@auth.route('/unconfirmed')
+def unconfirmed():
+    return render_template('auth/unconfirmed.html')
+
+
+
 @auth.before_app_request
-def before_request():
+def before_app_request():
     print(request.endpoint)
+    if current_user.is_authenticated:
+        current_user.ping()
+        if not current_user.confirmed and request.endpoint[:5] != 'auth.':
+            return redirect(url_for('auth.unconfirmed'))
+        if request.endpoint == 'auth.login':
+            return redirect(url_for('main.index'))

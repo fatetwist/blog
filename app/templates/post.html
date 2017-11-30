@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block title2 %}
+博客页
+{% endblock %}
+
+
+{% block page_content %}
+    {% include '_posts.html' %}
+    <hr>
+{{ wtf.quick_form(form) }}
+    <hr>
+    <ul class="list-group">
+    {% for c in comments %}
+  <li class="list-group-item">
+  <img src="{{ c.user.avatar }} " width="64px" height="64px">
+      {{ c.body }}
+      <hr>
+  <span class="badge" style="text-align: right">评论时间: {{ c.timastamp }}</span><br>
+
+
+
+  </li>
+
+    {% endfor %}
+</ul>
+{% endblock %}
