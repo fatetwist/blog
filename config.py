@@ -32,5 +32,5 @@ class Development(Config):
 
 config = {
     'Development':Development,
-    'default':Development
+    'default': Development
 }

@@ -5,15 +5,15 @@ from wtforms.validators import Required, Length, Email, EqualTo, ValidationError
 from ..models import User
 
 class LoginForm(Form):
-    email = StringField('Email', validators=[Required(),Length(1,64),Email()])
-    password = PasswordField('password', validators=[Required()])
-    remember_me = BooleanField('Keep me logged in')
+    email = StringField('邮箱', validators=[Required(),Length(1,64),Email()])
+    password = PasswordField('密码', validators=[Required()])
+    remember_me = BooleanField('保存登录状态')
     submit = SubmitField('Log in')
 
 class RegistrationForm(Form):
-    email = StringField('Email', validators=[Required(),Length(1,64),Email()])
-    username = StringField('username', validators=[Required(), Length(1,64)])
-    password = PasswordField('password', validators=[Required(), EqualTo('password2', message='两次输入的密码不一致！')])
+    email = StringField('邮箱', validators=[Required(), Length(1,64), Email()])
+    username = StringField('用户名', validators=[Required(), Length(1, 64)])
+    password = PasswordField('密码', validators=[Required(), EqualTo('password2', message='两次输入的密码不一致！')])
     password2 = PasswordField('确认密码', validators=[Required()])
     submit = SubmitField('立即注册')
 

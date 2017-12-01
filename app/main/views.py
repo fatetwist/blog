@@ -82,11 +82,17 @@ def post(id):
 @main.route('/EditProfile', methods=['POST', 'GET'])
 @login_required
 def EditProfile():
+    u_id = request.args.get('id', -1, type=int)
+    if u_id == -1:
+        u = current_user._get_current_object()
+    else:
+        u = User.query.filter_by(id=u_id).first()
     form = EditProfileForm()
     if form.validate_on_submit():
-        current_user.name = form.name.data
-        current_user.location = form.location.data
-        current_user.about_me = form.about_me.data
+
+        u.name = form.name.data
+        u.location = form.location.data
+        u.about_me = form.about_me.data
         avatar = request.files.get('avatar', None)
         fname = avatar.filename
         if fname != '':
@@ -96,18 +102,21 @@ def EditProfile():
             flag = '.' in fname and fname.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
             if not flag:
                 flash('文件类型错误')
-                return redirect(url_for('main.user', username=current_user.username))
-            img_name = '{}_{}'.format(current_user.username, fname)
+                return redirect(url_for('main.user', username=u.username))
+            img_name = '{}_{}'.format(u.username, fname)
             img_save = os.path.join(UPLOAD_FOLDER, img_name)
             avatar.save(img_save)
-            current_user.avatar = '/static/avatar/{}_{}'.format(current_user.username,fname)
+            u.avatar = '/static/avatar/{}_{}'.format(current_user.username,fname)
         db.session.add(current_user)
         flash('个人资料已经修改！')
-        return redirect(url_for('main.user', username=current_user.username))
-    form.name.data = current_user.name
-    form.location.data = current_user.location
-    form.about_me.data = current_user.about_me
-    return render_template('EditProfile.html', form=form)
+        return redirect(url_for('main.user', username=u.username))
+
+
+    form.name.data = u.name
+    form.location.data = u.location
+    form.about_me.data = u.about_me
+
+    return render_template('EditProfile.html', form=form, u=u)
 
 
 @main.route('/Edit-post/<int:id>', methods=['POST', 'GET'])

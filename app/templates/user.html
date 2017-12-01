@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% import '_macros.html' as macro %}
 {% block page_content %}
-<div class="page-header">
+<div class="page-header panel container">
  <h1>{{ user.username }}的个人资料</h1>
 <hr>
+
  <img src="{{ user.avatar }}" width="128px" height="128px">
 
 
@@ -20,7 +21,7 @@
  {% endif %}
 
 
- {% if current_user.is_admin() %}
+ {% if current_user.is_authenticated %}
      <p>邮箱地址：<a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
  {% endif %}
 
@@ -30,14 +31,14 @@
 
 
  <p>
-     注册时间：{{ moment(user.member_since).format('LLLL') }}</p>
+     注册时间：{{ moment(user.member_since).format('YYYY年M月D日 H:mm:ss a') }}</p>
 <p> 最后一次登录时间：{{ moment(user.last_seen).fromNow() }}
  </p><br>
 <p>关注用户：{{ user.followed.count() }}</p>
     <p>被 {{ user.follower.count() }} 个用户关注</p>
-    <button class="btn btn-primary"><a href="{{ url_for('.follow', username=user.username) }}">关注TA</a></button>
+    <button class="btn btn-primary"><a style="color: white;" href="{{ url_for('.follow', username=user.username) }}">关注TA</a></button>
 {% if user == current_user or current_user.is_admin() %}
-<a class="btn btn-default" href="{{ url_for('.EditProfile') }}">
+<a class="btn btn-default" href="{{ url_for('.EditProfile', id=user.id) }}">
  编辑资料
 </a>
 

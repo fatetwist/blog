@@ -4,6 +4,6 @@
 {% block page_content %}
     <h1>编辑您的个人资料</h1>
     <hr>
-    <img src="{{ current_user.avatar }}" width="128px" height="128px">
+    <img src="{{ u.avatar }}" width="128px" height="128px">
     {{ wtf.quick_form(form) }}
 {% endblock %}

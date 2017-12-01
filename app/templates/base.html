@@ -5,6 +5,14 @@
     {{ moment.lang('zh_CN') }}
 {% endblock %}
 {% block title %}{% block title2 %}{% endblock %}Flasky{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style>
+    body {
+        background: url({{ url_for('static',filename='main/bg_default.jpg') }}) no-repeat, black;
+    }
+    </style>
+{% endblock %}
 {% block navbar %}
 
 <div class="navbar navbar-inverse" role="navigation">
@@ -17,7 +25,7 @@
  <span class="icon-bar"></span>
  <span class="icon-bar"></span>
  </button>
- <a class="navbar-brand" href="/">LOGO</a>
+ <a class="navbar-brand" href="/">南大博客</a>
  </div>
  <div class="navbar-collapse collapse">
  <ul class="nav navbar-nav">
@@ -50,7 +58,7 @@
 
 {% endblock %}
 {% block content %}
-<div class="jumbotron">
+
     <div class="container">
 {% for m in get_flashed_messages() %}
 
@@ -61,6 +69,9 @@
 {% endfor %}
  {% block page_content %}{% endblock %}
     </div>
-</div>
+
+    <div class="footer">
+    <p style="color: white; text-align: center;">Powered by Auto 173</p>
+    </div>
 {% endblock %}
 
