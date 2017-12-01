@@ -90,7 +90,7 @@ def EditProfile():
         avatar = request.files.get('avatar', None)
         fname = avatar.filename
         if fname != '':
-            UPLOAD_FOLDER = os.getcwd() + '\\app\\static\\avatar\\'
+            UPLOAD_FOLDER = os.path.join(os.getcwd(), 'app', 'static', 'avatar')
             print('头像文件上传位置：' + UPLOAD_FOLDER)
             ALLOWED_EXTENSIONS = ['png', 'gif', 'jpeg', 'jpg']
             flag = '.' in fname and fname.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
