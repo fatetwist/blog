@@ -97,7 +97,9 @@ def EditProfile():
             if not flag:
                 flash('文件类型错误')
                 return redirect(url_for('main.user', username=current_user.username))
-            avatar.save('{}{}_{}'.format(UPLOAD_FOLDER, current_user.username, fname))
+            img_name = '{}_{}'.format(current_user.username, fname)
+            img_save = os.path.join(UPLOAD_FOLDER, img_name)
+            avatar.save(img_save)
             current_user.avatar = '/static/avatar/{}_{}'.format(current_user.username,fname)
         db.session.add(current_user)
         flash('个人资料已经修改！')
