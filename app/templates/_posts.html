@@ -4,9 +4,9 @@
     <div class="panel panel-primary">
     <div class="panel-heading">{{ x.author.username }}</div>
     <li class="list-group-item">
-        <a style="float: left;" href="{{ url_for('.user', username=x.author.username) }}"><img src="{{ x.author.avatar }}" width="64px" height="64px"></a>
+        <a style="float: left;" href="{{ url_for('.user', username=x.author.username) }}"><img class="img-circle" src="{{ x.author.avatar }}" width="64px" height="64px"></a>
 
-     <div class="post-body">
+     <div class="post-body" style="min-height: 69px;">
          {% if x.body_html %}
          {{ x.body_html | safe }}
          {% else %}
@@ -20,7 +20,7 @@
 
      <div class="panel-footer">
 
-     <span class="badge" style="background-color: red"><span class="glyphicon glyphicon-comment"></span> 评论 {{ x.comments.count() }}</span>
+     <span class="badge" style="float:left;background-color: red"><span class="glyphicon glyphicon-comment"></span> 评论 {{ x.comments.count() }}</span>
      <div style="display: inline;float: right" >
          {% if current_user.is_admin() or current_user==x.author %}
          <span class="label label-primary"><a href="{{ url_for('.edit_post', id=x.id) }}" style="color: white;">编辑博文</a></span>
@@ -28,6 +28,7 @@
          <span class="label label-default"><a href="{{ url_for('.post', id=x.id) }}" style="color: red;">查看详情</a></span>
          <span class="badge">发表于{{ moment(x.timestamp).format('YYYY年M月D日 H:mm:ss a') }}</span><br>
      </div>
+     <br>
      </div>
 
     </div>

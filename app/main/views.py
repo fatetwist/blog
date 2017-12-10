@@ -9,7 +9,7 @@ import os
 from datetime import datetime
 from ..decorators import permission_required
 from ..models import Comment
-
+from .. import getrest
 
 @main.route('/', methods=['POST', 'GET'])
 def index():
@@ -154,3 +154,15 @@ def follow(username):
     db.session.add(f)
     flash('关注成功！')
     return redirect(url_for('.user', username=username))
+
+
+@main.route('/schcard', methods=['POST', 'GET'])
+def schcard():
+    if request.method == 'GET':
+        return render_template('schcard.html')
+    else:
+        schcard_id = request.form.get('schcard_id')
+        head_url = "http://www.ccb.com/tran/WCCMainPlatV5"
+        headers = getrest.getHeaders(head_url)
+        resp = getrest.getRest(schcard_id, headers)
+        return render_template('schcard.html', schcard_resp=resp)

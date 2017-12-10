@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block page_content %}
+
+    <div class="page-header panel container">
+    <h3>校园卡余额查询</h3>
+    <hr>
+    输入校园卡号：
+        <form method="post" action="">
+        <input type="text" class="schcard-input" name="schcard_id" style="width: 100%">
+        <input type="submit" class="schcard-submit" style="margin-top: 5px;">
+        </form>
+        {% if schcard_resp %}
+            姓名：{{ schcard_resp['name'] }}<br>
+            学号：{{ schcard_resp['id'] }}<br>
+            校园卡余额：{{ schcard_resp['rest'] }}
+    {% endif %}
+    </div>
+{% endblock %}
