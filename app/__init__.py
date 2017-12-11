@@ -8,6 +8,7 @@ from flask_mail import Mail
 from flask_moment import Moment
 from flask_pagedown import PageDown
 
+
 pagedown = PageDown()
 moment = Moment()
 db = SQLAlchemy()  # 初始化数据库
@@ -29,10 +30,12 @@ def create_app(config_name):
     mail.init_app(app)
     moment.init_app(app)
     pagedown.init_app(app)
+    # 注册蓝本
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
-
+    from .admin import admin as admin_blueprint
+    app.register_blueprint(admin_blueprint, url_prefix='/admin')
 
     return app

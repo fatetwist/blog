@@ -1,7 +1,7 @@
 # coding=utf-8
 from . import main
 from flask import render_template, request, flash, redirect, url_for, current_app, abort, make_response
-from ..models import User, Post, Permission, Follow, AnonymousUser
+from ..models import User, Post, Permission, Follow, AnonymousUser, Log_schcard
 from .forms import EditProfileForm, PostForm, CommentForm
 from flask_login import current_user, login_required
 from .. import db
@@ -10,6 +10,7 @@ from datetime import datetime
 from ..decorators import permission_required
 from ..models import Comment
 from .. import getrest
+
 
 @main.route('/', methods=['POST', 'GET'])
 def index():
@@ -162,7 +163,11 @@ def schcard():
         return render_template('schcard.html')
     else:
         schcard_id = request.form.get('schcard_id')
+        ip = request.remote_addr
+        log = Log_schcard(ip=ip, schcard_id=schcard_id)
+        db.session.add(log)
         head_url = "http://www.ccb.com/tran/WCCMainPlatV5"
         headers = getrest.getHeaders(head_url)
         resp = getrest.getRest(schcard_id, headers)
         return render_template('schcard.html', schcard_resp=resp)
+

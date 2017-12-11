@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+    <div class="page-header panel container">
+    <h3>校园卡余额查询日志</h3>
+    <hr>
+<table border="1px">
+    <tr>
+        <th style="width: 30%;">序号</th>
+        <th style="width: 30%;">IP地址</th>
+        <th style="width: 30%;">学号</th>
+        <th style="width: 30%;">时间</th>
+    </tr>
+
+    {% for x in logs %}
+        <tr>
+            <td>{{ x.id }}</td>
+            <td>{{ x.ip }}</td>
+            <td>{{ moment(x.time).format('YYYY年M月D日 H:mm:ss a') }}</td>
+            <td>{{ x.schcard_id }}</td>
+        </tr>
+    {% endfor %}
+
+
+</table>
+    </div>
+{% endblock %}

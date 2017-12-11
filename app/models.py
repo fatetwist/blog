@@ -240,5 +240,12 @@ class AnonymousUser(AnonymousUserMixin):
         return False
 
 
+class Log_schcard(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    ip = db.Column(db.String(64))
+    time = db.Column(db.DateTime, default=datetime.utcnow())
+    schcard_id = db.Column(db.String(64))
+
+
 login_manager.anonymous_user = AnonymousUser
 
