@@ -16,7 +16,7 @@
         <tr>
             <td>{{ x.id }}</td>
             <td>{{ x.ip }}</td>
-            <td>{{ moment(x.time).format('YYYY年M月D日 H:mm:ss a') }}</td>
+            <td>{{ moment(x.time).format('YYYY-M-D H:mm:ss') }}</td>
             <td>{{ x.schcard_id }}</td>
         </tr>
     {% endfor %}

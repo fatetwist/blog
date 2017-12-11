@@ -5,7 +5,6 @@ from flask import render_template
 
 
 @admin.route('/log_schcard')
-
 def log_schcard():
     logs = Log_schcard.query.order_by(Log_schcard.time.desc()).all()
     print(logs)
