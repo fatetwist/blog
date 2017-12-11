@@ -10,12 +10,12 @@
     {{ super() }}
     <link rel="stylesheet" href="">
 {% endblock %}
-{% block title %}Flasky{% endblock %}
+{% block title2 %}首页{% endblock %}
 
 {% block page_content %}
 
 
-    <h1 style="text-align: center">Hello, {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}Stranger{% endif %}!</h1>
+    <h1 style="text-align: center">Hello, {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}游客{% endif %}!</h1>
     {% if current_user.can(Permission.WRITE_ARTICLES) %}
     {{ wtf.quick_form(form) }}
     {% endif %}

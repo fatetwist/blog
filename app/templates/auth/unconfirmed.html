@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
+{% block title2 %}用户激活{% endblock %}
 {% block page_content %}
 
-    <h1>用户未认证！</h1>
-    <h3>邮件已经发送到您的邮箱，请及时通过邮件中的链接来激活用户！</h3><br>
+    <h1>用户未激活！</h1>
+    <h3>激活邮件已经发送到您的邮箱，请及时通过邮件中的链接来激活用户！</h3><br>
 
     <h3>没有收到邮件？<a href="{{ url_for('auth.resend_mail') }}">重新发送确认邮件</a></h3>
     <br>
