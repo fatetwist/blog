@@ -7,13 +7,8 @@
 {% block title %}{% block title2 %}{% endblock %} - 南大博客{% endblock %}
 {% block head %}
     {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style1.css') }}?v1.4">
     <link rel="icon" href="{{ url_for('static', filename='main/html_logo.png') }}" type="image/x-icon"/>
-    <style>
-    body {
-        background: url({{ url_for('static',filename='main/bg_2.jpg') }}) no-repeat, black;
-        background-attachment: fixed;
-    }
-    </style>
 {% endblock %}
 {% block navbar %}
 
@@ -32,6 +27,7 @@
  <div class="navbar-collapse collapse">
  <ul class="nav navbar-nav">
  <li><a href="/">首页</a></li>
+ <li><a href="{{ url_for('main.schcard') }}">校园卡服务</a></li>
  </ul>
      <ul class="nav navbar-nav navbar-right">
  {% if current_user.is_authenticated %}
@@ -39,7 +35,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ current_user.username }}<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="{{ url_for('main.user', username=current_user.username) }}">个人资料</a></li>
-            <li><a href="#">我的文章</a></li>
+            <li><a href="{{ url_for('main.my_article') }}">我的文章</a></li>
             <li><a href="#">我的关注</a></li>
             <li role="separator" class="divider"></li>
               {% if current_user.role_id==1 %}

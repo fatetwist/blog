@@ -1,0 +1,13 @@
+body {
+    background: url('/static/main/bg_2.jpg') no-repeat center, black;
+    background-size: cover;
+    width: 100%;
+    background-attachment: fixed;
+}
+
+h1.head-title,label,span.span-register  {
+    color: white;
+}
+
+
+

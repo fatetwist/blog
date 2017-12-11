@@ -9,7 +9,7 @@ class LoginForm(Form):
     email = StringField('邮箱', validators=[Required(), Length(1, 64), Email()])
     password = PasswordField('密码', validators=[Required()])
     remember_me = BooleanField('保存登录状态')
-    submit = SubmitField('立即登录', render_kw={'class': 'col-md-offset-3', 'style': "position:relative;left:36%"})
+    submit = SubmitField('立即登录')
 
 
 class RegistrationForm(Form):

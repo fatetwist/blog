@@ -15,7 +15,7 @@
 {% block page_content %}
 
 
-    <h1 style="text-align: center">Hello, {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}游客{% endif %}!</h1>
+    <h1 class='head-title' style="text-align: center">Hello, {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}游客{% endif %}!</h1>
     {% if current_user.can(Permission.WRITE_ARTICLES) %}
     {{ wtf.quick_form(form) }}
     {% endif %}

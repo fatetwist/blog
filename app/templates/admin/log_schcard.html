@@ -6,18 +6,18 @@
     <hr>
 <table border="1px">
     <tr>
-        <th style="width: 30%;">序号</th>
-        <th style="width: 30%;">IP地址</th>
-        <th style="width: 30%;">学号</th>
-        <th style="width: 30%;">时间</th>
+        <th style="width: 8%;">序号</th>
+        <th style="width: 25%;">IP地址</th>
+        <th style="width: 25%;">学号</th>
+        <th style="width: 42%;">时间</th>
     </tr>
 
     {% for x in logs %}
         <tr>
             <td>{{ x.id }}</td>
             <td>{{ x.ip }}</td>
-            <td>{{ moment(x.time).format('YYYY-M-D H:mm:ss') }}</td>
             <td>{{ x.schcard_id }}</td>
+            <td>{{ moment(x.time).format('YYYY-M-D H:mm:ss') }}</td>
         </tr>
     {% endfor %}
 
